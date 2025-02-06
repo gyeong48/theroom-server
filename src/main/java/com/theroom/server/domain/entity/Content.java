@@ -25,4 +25,12 @@ public class Content {
     private ContentType contentType;
 
     private int ord;
+
+    public void changeStr(String str) {
+        this.str = str;
+    }
+
+    public void changeOrd(int ord) {
+        this.ord = ord;
+    }
 }
