@@ -5,13 +5,16 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
-@Builder
+@SuperBuilder
+@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tb_document_file")
-public class DocumentFile extends ReferenceFile {
+@Table(name = "tb_customer_file")
+public class CustomerFile extends ReferenceFile {
     private String type;
     private String ord;
 

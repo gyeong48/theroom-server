@@ -6,7 +6,7 @@ import com.theroom.server.domain.response.PortfolioDetailResponse;
 import com.theroom.server.domain.response.PortfolioModifyDetailResponse;
 import com.theroom.server.domain.response.PortfolioResponse;
 import com.theroom.server.service.PortfolioService;
-import com.theroom.server.util.CustomFileUtil;
+import com.theroom.server.util.LocalFileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.Resource;
@@ -25,7 +25,7 @@ import java.util.Map;
 public class PortfolioController {
 
     private final PortfolioService portfolioService;
-    private final CustomFileUtil fileUtil;
+    private final LocalFileUtil fileUtil;
 
     @PostMapping("/add")
     public ResponseEntity<Map<String, String>> add(

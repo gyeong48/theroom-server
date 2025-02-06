@@ -1,6 +1,7 @@
 package com.theroom.server.util;
 
 import com.theroom.server.domain.entity.PortfolioImageFile;
+import com.theroom.server.domain.entity.ReferenceFile;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +21,7 @@ import java.util.UUID;
 
 @Component
 @Log4j2
-public class CustomFileUtil {
+public class LocalFileUtil {
 
     @Value("${upload.path}")
     private String path;
@@ -86,9 +87,19 @@ public class CustomFileUtil {
         }
     }
 
-    public void deleteFiles(List<PortfolioImageFile> files) {
-        for (PortfolioImageFile file : files) {
+    public void deleteFiles(List<? extends ReferenceFile> files) {
+        for (ReferenceFile file : files) {
             deleteFile(file.getName());
         }
+    }
+
+    public Resource downloadFile(String filename) {
+        File file = new File(path, filename);
+
+        if (!file.exists()) {
+            return null;
+        }
+
+        return new FileSystemResource(file);
     }
 }

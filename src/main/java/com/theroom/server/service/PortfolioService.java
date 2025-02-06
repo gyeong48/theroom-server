@@ -8,7 +8,7 @@ import com.theroom.server.domain.response.PortfolioModifyDetailResponse;
 import com.theroom.server.domain.response.PortfolioResponse;
 import com.theroom.server.domain.response.SimpleFile;
 import com.theroom.server.repository.PortfolioRepository;
-import com.theroom.server.util.CustomFileUtil;
+import com.theroom.server.util.LocalFileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ import java.util.List;
 public class PortfolioService {
 
     private final PortfolioRepository portfolioRepository;
-    private final CustomFileUtil customFileUtil;
+    private final LocalFileUtil localFileUtil;
 
     @Transactional
     public void addPortfolio(PortfolioAddRequest request, MultipartFile thumbnail, List<MultipartFile> imageFiles) {
@@ -36,7 +36,7 @@ public class PortfolioService {
 
         if (thumbnail != null) {
             thumbnailFile = ThumbnailFile.builder()
-                    .name(customFileUtil.saveFile(thumbnail))
+                    .name(localFileUtil.saveFile(thumbnail))
                     .originalName(thumbnail.getOriginalFilename())
                     .size(thumbnail.getSize())
                     .createdAt(LocalDateTime.now())
@@ -48,7 +48,7 @@ public class PortfolioService {
         if (imageFiles != null) {
             for (MultipartFile file : imageFiles) {
                 PortfolioImageFile portfolioImageFile = PortfolioImageFile.builder()
-                        .name(customFileUtil.saveFile(file))
+                        .name(localFileUtil.saveFile(file))
                         .originalName(file.getOriginalFilename())
                         .size(file.getSize())
                         .createdAt(LocalDateTime.now())
@@ -170,7 +170,7 @@ public class PortfolioService {
         //thumbnail 변경
         if (thumbnail != null) {
             ThumbnailFile thumbnailFile = ThumbnailFile.builder()
-                    .name(customFileUtil.saveFile(thumbnail))
+                    .name(localFileUtil.saveFile(thumbnail))
                     .originalName(thumbnail.getOriginalFilename())
                     .size(thumbnail.getSize())
                     .createdAt(LocalDateTime.now())
@@ -179,7 +179,7 @@ public class PortfolioService {
                     .build();
 
             //기존 thumbnail 이미지 삭제
-            customFileUtil.deleteFile(savedPortfolio.getThumbnailFile().getName());
+            localFileUtil.deleteFile(savedPortfolio.getThumbnailFile().getName());
 
             //portfolio entity에 새로운 값이 대체 되면서 orphanremoval 속성에 의해 자동으로 delete문이 실행된다.
             savedPortfolio.changeThumbnailFile(thumbnailFile);
@@ -192,7 +192,7 @@ public class PortfolioService {
                 .toList();
 
         //이미지 삭제
-        customFileUtil.deleteFiles(deletedImageFiles);
+        localFileUtil.deleteFiles(deletedImageFiles);
 
         //수정시 제외되지 않은 이미지 파일
         List<PortfolioImageFile> maintainedImageFiles = savedPortfolio.getPortfolioImageFiles()
@@ -210,7 +210,7 @@ public class PortfolioService {
         if (imageFiles != null) {
             for (MultipartFile file : imageFiles) {
                 PortfolioImageFile portfolioImageFile = PortfolioImageFile.builder()
-                        .name(customFileUtil.saveFile(file))
+                        .name(localFileUtil.saveFile(file))
                         .originalName(file.getOriginalFilename())
                         .size(file.getSize())
                         .createdAt(LocalDateTime.now())
@@ -233,11 +233,11 @@ public class PortfolioService {
         List<PortfolioImageFile> portfolioImageFiles = savedPortfolio.getPortfolioImageFiles();
 
         if (thumbnailFile != null) {
-            customFileUtil.deleteFile(thumbnailFile.getName());
+            localFileUtil.deleteFile(thumbnailFile.getName());
         }
 
         if (portfolioImageFiles != null) {
-            customFileUtil.deleteFiles(portfolioImageFiles);
+            localFileUtil.deleteFiles(portfolioImageFiles);
         }
 
         portfolioRepository.deleteById(portfolioId);
