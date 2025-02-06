@@ -1,4 +1,4 @@
-package com.theroom.server.domain;
+package com.theroom.server.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
