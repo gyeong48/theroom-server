@@ -116,19 +116,15 @@ public class ContentService {
         log.info("addMainImages");
         List<MainImageFile> foundImageFiles = mainImageFileRepository.findAll();
 
-        //수정시에 제외된 이미지파일 필터링
         List<MainImageFile> deletedImageFiles = foundImageFiles.stream()
                 .filter(mi -> !uploadImageFilenames.contains(mi.getName()))
                 .toList();
 
         if (!deletedImageFiles.isEmpty()) {
-            //이미지 삭제
             localFileUtil.deleteFiles(deletedImageFiles);
-            //db 삭제
             mainImageFileRepository.deleteAll(deletedImageFiles);
         }
 
-        //imageFiles 저장 및 변환
         if (imageFiles != null) {
             for (MultipartFile file : imageFiles) {
                 MainImageFile mainImageFile = MainImageFile.builder()

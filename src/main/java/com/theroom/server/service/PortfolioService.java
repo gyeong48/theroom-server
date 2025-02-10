@@ -84,10 +84,6 @@ public class PortfolioService {
         portfolioRepository.save(portfolio);
     }
 
-    /**
-     * 나중에 페이지네이션 적용 필요
-     * PageRequest를 따로 만들어서 그안에 list로 담고, 페이지에 필요한 정보를 포함하여 클라이언트로 전송 예정
-     */
     public List<PortfolioResponse> getList() {
         return portfolioRepository.findAllWithThumbnail()
                 .stream()
@@ -177,37 +173,23 @@ public class PortfolioService {
                     .updatedAt(LocalDateTime.now())
                     .type(thumbnail.getContentType())
                     .build();
-
-            //기존 thumbnail 이미지 삭제
             localFileUtil.deleteFile(savedPortfolio.getThumbnailFile().getName());
-
-            //portfolio entity에 새로운 값이 대체 되면서 orphanremoval 속성에 의해 자동으로 delete문이 실행된다.
             savedPortfolio.changeThumbnailFile(thumbnailFile);
         }
 
-        //수정시에 제외된 이미지파일 필터링
         List<PortfolioImageFile> deletedImageFiles = savedPortfolio.getPortfolioImageFiles()
                 .stream()
                 .filter(pi -> !request.getUploadImageFilenames().contains(pi.getName()))
                 .toList();
-
-        //이미지 삭제
         localFileUtil.deleteFiles(deletedImageFiles);
 
-        //수정시 제외되지 않은 이미지 파일 수정시 제외된 이미지 파일을 리스트에서 개별 분리를 못하므로
-        //전부 삭제후 다시 값을 넣어준다. orphanRemoval 속성을 사용할 때 List는 그 자체를 새로 대체하면 안되고(단일 값은 가능), 객체를 추가하거나 빼야 한다. 그래야 오류가 안남
         List<PortfolioImageFile> maintainedImageFiles = savedPortfolio.getPortfolioImageFiles()
                 .stream()
                 .filter(pi -> request.getUploadImageFilenames().contains(pi.getName()))
                 .toList();
-
-        //기존 리스트 초기화
         savedPortfolio.clearPortfolioImageFiles();
-
-        //재 저장
         savedPortfolio.getPortfolioImageFiles().addAll(maintainedImageFiles);
 
-        //imageFiles 저장 및 변환
         if (imageFiles != null) {
             for (MultipartFile file : imageFiles) {
                 PortfolioImageFile portfolioImageFile = PortfolioImageFile.builder()
@@ -223,7 +205,6 @@ public class PortfolioService {
             }
         }
 
-        //파일 이외 값들 저장
         savedPortfolio.modifyPortfolio(request);
     }
 

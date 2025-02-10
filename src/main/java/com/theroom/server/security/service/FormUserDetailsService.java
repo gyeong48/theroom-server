@@ -5,7 +5,7 @@ import com.theroom.server.security.dto.AccountDto;
 import com.theroom.server.domain.entity.Account;
 import com.theroom.server.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
 @Service("userDetailsService")
 @RequiredArgsConstructor
+@Log4j2
 public class FormUserDetailsService implements UserDetailsService {
 
     private final AccountRepository accountRepository;

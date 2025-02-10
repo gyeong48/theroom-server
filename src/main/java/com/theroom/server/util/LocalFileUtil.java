@@ -37,9 +37,6 @@ public class LocalFileUtil {
         path = tempFolder.getAbsolutePath();
     }
 
-    /**
-     * Resource에 대한 공부 필요
-     */
     public Resource getFile(String filename) {
         FileSystemResource resource = new FileSystemResource(path + File.separator + filename);
 

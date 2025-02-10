@@ -27,9 +27,6 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
-        log.info("username: {}", username);
-        log.info("password: {}", password);
-
         AccountContext accountContext = (AccountContext) userDetailsService.loadUserByUsername(username);
 
         if (!passwordEncoder.matches(password, accountContext.getPassword())) {
