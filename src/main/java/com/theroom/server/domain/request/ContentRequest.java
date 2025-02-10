@@ -1,10 +1,13 @@
 package com.theroom.server.domain.request;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class ContentRequest {
 
     private Long id;
+    private String title;
     private String str;
 }

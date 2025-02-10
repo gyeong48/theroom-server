@@ -22,4 +22,24 @@ public class Address {
     private String postCode;
     private double latitude;
     private double longitude;
+
+    public void changeMainAddress(String mainAddress) {
+        this.mainAddress = mainAddress;
+    }
+
+    public void changeDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
+    }
+
+    public void changePostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public void changeLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void changeLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 }

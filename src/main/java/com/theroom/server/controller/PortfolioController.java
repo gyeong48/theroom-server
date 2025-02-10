@@ -43,19 +43,19 @@ public class PortfolioController {
         return new ResponseEntity<>(Map.of("data", result), HttpStatus.OK);
     }
 
-    @GetMapping("/{portfolioId}")
+    @GetMapping("/read/{portfolioId}")
     public ResponseEntity<Map<String, PortfolioDetailResponse>> getDetail(@PathVariable(name = "portfolioId") Long portfolioId) {
         PortfolioDetailResponse result = portfolioService.getDetail(portfolioId);
         return new ResponseEntity<>(Map.of("data", result), HttpStatus.OK);
     }
 
-    @GetMapping("/{portfolioId}/modify")
+    @GetMapping("/modify/{portfolioId}")
     public ResponseEntity<Map<String, PortfolioModifyDetailResponse>> getModifyDetail(@PathVariable(name = "portfolioId") Long portfolioId) {
         PortfolioModifyDetailResponse result = portfolioService.getModifyDetail(portfolioId);
         return new ResponseEntity<>(Map.of("data", result), HttpStatus.OK);
     }
 
-    @PutMapping("/{portfolioId}/modify")
+    @PutMapping("/modify/{portfolioId}")
     public ResponseEntity<Map<String, String>> modify(
             @PathVariable(name = "portfolioId") Long portfolioId,
             PortfolioModifyRequest request,

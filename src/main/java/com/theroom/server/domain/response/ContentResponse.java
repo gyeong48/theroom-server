@@ -8,5 +8,6 @@ import lombok.Data;
 public class ContentResponse {
 
     private Long id;
+    private String title;
     private String str;
 }

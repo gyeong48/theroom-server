@@ -194,7 +194,8 @@ public class PortfolioService {
         //이미지 삭제
         localFileUtil.deleteFiles(deletedImageFiles);
 
-        //수정시 제외되지 않은 이미지 파일
+        //수정시 제외되지 않은 이미지 파일 수정시 제외된 이미지 파일을 리스트에서 개별 분리를 못하므로
+        //전부 삭제후 다시 값을 넣어준다. orphanRemoval 속성을 사용할 때 List는 그 자체를 새로 대체하면 안되고(단일 값은 가능), 객체를 추가하거나 빼야 한다. 그래야 오류가 안남
         List<PortfolioImageFile> maintainedImageFiles = savedPortfolio.getPortfolioImageFiles()
                 .stream()
                 .filter(pi -> request.getUploadImageFilenames().contains(pi.getName()))

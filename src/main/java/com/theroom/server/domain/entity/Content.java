@@ -18,6 +18,8 @@ public class Content {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+
     @Lob
     private String str;
 
@@ -32,5 +34,9 @@ public class Content {
 
     public void changeOrd(int ord) {
         this.ord = ord;
+    }
+
+    public void changeTitle(String title) {
+        this.title = title;
     }
 }
