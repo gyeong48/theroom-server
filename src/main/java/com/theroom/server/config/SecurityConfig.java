@@ -34,7 +34,7 @@ public class SecurityConfig {
     @Value("${allow.origin.path.main}")
     private String allowedOriginMain;
 
-    @Value("${allow.origin.path.syb}")
+    @Value("${allow.origin.path.sub}")
     private String allowedOriginSub;
 
     @Bean
