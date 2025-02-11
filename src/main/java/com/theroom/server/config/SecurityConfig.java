@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -30,8 +31,11 @@ public class SecurityConfig {
     private final AccessDeniedHandler deniedHandler;
     private final AuthenticationEntryPoint authenticationEntryPoint;
 
-    @Value("${allow.origin.path}")
-    private String allowedOrigin;
+    @Value("${allow.origin.path.main}")
+    private String allowedOriginMain;
+
+    @Value("${allow.origin.path.syb}")
+    private String allowedOriginSub;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -73,7 +77,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin(allowedOrigin);
+        configuration.setAllowedOrigins(List.of(allowedOriginMain, allowedOriginSub));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
