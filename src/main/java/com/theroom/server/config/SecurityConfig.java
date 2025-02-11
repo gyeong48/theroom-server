@@ -55,13 +55,6 @@ public class SecurityConfig {
                         .successHandler(successHandler)
                         .failureHandler(failureHandler)
                 )
-                .logout(logout -> logout
-                        .logoutUrl("/api/account/logout")
-                        .logoutSuccessUrl("/api/account/logoutSuccess")
-                        .invalidateHttpSession(true)
-                        .clearAuthentication(true)
-                        .deleteCookies("JSESSIONID")
-                )
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors
                         .configurationSource(corsConfigurationSource())
