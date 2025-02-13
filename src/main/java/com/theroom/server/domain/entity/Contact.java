@@ -54,6 +54,9 @@ public class Contact {
     private int budget;
 
     @Lob
+    private String customerMemo;
+
+    @Lob
     private String memo;
 
     public void modify(ContactModifyRequest request) {
@@ -75,5 +78,6 @@ public class Contact {
                 .build();
         this.processStatus = request.getStatus();
         this.memo = request.getMemo();
+        this.customerMemo = request.getCustomerMemo();
     }
 }

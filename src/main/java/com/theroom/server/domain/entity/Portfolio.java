@@ -44,16 +44,16 @@ public class Portfolio {
 
     private String title;
     private int supplyArea;
-    private int exclusiveArea;
+
+    private int completion;
     private LocalDate startDate;
     private LocalDate endDate;
     private int budget;
-    private LocalDate completion;
 
     public void modifyPortfolio(PortfolioModifyRequest request) {
         this.title = request.getTitle();
         this.supplyArea = request.getSupplyArea();
-        this.exclusiveArea = request.getExclusiveArea();
+        this.completion = request.getCompletion();
         this.startDate = request.getStartDate();
         this.endDate = request.getEndDate();
         this.budget = request.getBudget();

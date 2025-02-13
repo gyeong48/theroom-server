@@ -68,6 +68,7 @@ public class ContactService {
                 .personalInformationAgree(true)
                 .customerFiles(customerFiles)
                 .memo("")
+                .customerMemo(request.getCustomerMemo())
                 .build();
 
         contactRepository.save(contact);
@@ -117,6 +118,7 @@ public class ContactService {
                         .toList()
                 )
                 .memo(contact.getMemo())
+                .customerMemo(contact.getCustomerMemo())
                 .build();
     }
 

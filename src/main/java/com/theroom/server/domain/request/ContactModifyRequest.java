@@ -32,4 +32,5 @@ public class ContactModifyRequest {
     private InteriorType interiorType;
     private String memo;
     private ProcessStatus status;
+    private String customerMemo;
 }

@@ -20,7 +20,7 @@ public class PortfolioModifyDetailResponse {
     private String title;
     private BuildingType buildingType;
     private int supplyArea;
-    private int exclusiveArea;
+    private int completion;
     private double latitude;
     private double longitude;
     private String postCode;

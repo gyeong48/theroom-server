@@ -20,7 +20,6 @@ public class PortfolioDetailResponse {
     private BuildingType buildingType;
     private String title;
     private int supplyArea;
-    private int exclusiveArea;
     long diffWeek;
     private int budget;
     private int completion;

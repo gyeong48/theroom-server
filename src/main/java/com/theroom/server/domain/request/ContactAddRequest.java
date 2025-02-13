@@ -29,4 +29,5 @@ public class ContactAddRequest {
     private LocalDate moveInDate;
     private int budget;
     private InteriorType interiorType;
+    private String customerMemo;
 }

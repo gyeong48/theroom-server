@@ -35,6 +35,7 @@ public class ContactDetailResponse {
     private InteriorType interiorType;
     private ProcessStatus status;
     private String memo;
+    private String customerMemo;
 
     @Builder.Default
     private List<SimpleFile> files = new ArrayList<>();
