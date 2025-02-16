@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface PortfolioRepository extends JpaRepository<Portfolio, Long> {
 
-    @Query("select p from Portfolio p join fetch p.thumbnailFile t")
+    @Query("select p from Portfolio p join fetch p.thumbnailFile t order by p.id desc")
     List<Portfolio> findAllWithThumbnail();
 
     @Query("select p from Portfolio p " +

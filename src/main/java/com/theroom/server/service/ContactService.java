@@ -65,6 +65,8 @@ public class ContactService {
                         .longitude(request.getLongitude())
                         .build()
                 )
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .personalInformationAgree(true)
                 .customerFiles(customerFiles)
                 .memo("")
@@ -75,7 +77,7 @@ public class ContactService {
     }
 
     public List<ContactResponse> getList() {
-        return contactRepository.findAll()
+        return contactRepository.findAllWithAddress()
                 .stream()
                 .map(c -> ContactResponse.builder()
                         .id(c.getId())

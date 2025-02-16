@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface ContactRepository extends JpaRepository<Contact, Long> {
 
-    @Query("select c from Contact c left join fetch c.address a")
+    @Query("select c from Contact c left join fetch c.address a order by c.id desc")
     List<Contact> findAllWithAddress();
 
     @Query("select c from Contact c " +

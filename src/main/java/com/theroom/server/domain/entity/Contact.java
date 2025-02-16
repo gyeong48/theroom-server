@@ -79,5 +79,6 @@ public class Contact {
         this.processStatus = request.getStatus();
         this.memo = request.getMemo();
         this.customerMemo = request.getCustomerMemo();
+        this.updatedAt = LocalDateTime.now();
     }
 }
