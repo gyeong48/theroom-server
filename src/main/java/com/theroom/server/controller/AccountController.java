@@ -3,6 +3,7 @@ package com.theroom.server.controller;
 import com.theroom.server.domain.request.AccountModifyRequest;
 import com.theroom.server.security.dto.AccountDto;
 import com.theroom.server.service.AccountService;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,13 @@ public class AccountController {
 
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
+
+            Cookie cookie = new Cookie("JSESSIONID", null);
+            cookie.setHttpOnly(true);
+            cookie.setSecure(true);
+            cookie.setPath("/");
+            cookie.setMaxAge(0); // 쿠키 즉시 삭제
+            response.addCookie(cookie);
         }
 
         return new ResponseEntity<>(Map.of("message", "success"), HttpStatus.OK);
