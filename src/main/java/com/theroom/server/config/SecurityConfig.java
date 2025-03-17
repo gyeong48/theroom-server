@@ -48,6 +48,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/contact/add").permitAll()
                         .requestMatchers("/api/account/login").permitAll()
                         .requestMatchers("/api/account/logoutSuccess").permitAll()
+                        .requestMatchers("/api/contact/download/**").authenticated()
                         .anyRequest().hasRole("ADMIN")
                 )
                 .formLogin(form -> form
@@ -55,7 +56,7 @@ public class SecurityConfig {
                         .successHandler(successHandler)
                         .failureHandler(failureHandler)
                 )
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf ->csrf.disable())
                 .cors(cors -> cors
                         .configurationSource(corsConfigurationSource())
                 )
