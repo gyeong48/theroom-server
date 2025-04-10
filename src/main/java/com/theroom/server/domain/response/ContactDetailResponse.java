@@ -23,7 +23,7 @@ public class ContactDetailResponse {
     private String email;
     private String phoneNumber;
     private BuildingType buildingType;
-    private int exclusiveArea;
+    private double exclusiveArea;
     private double latitude;
     private double longitude;
     private String postCode;

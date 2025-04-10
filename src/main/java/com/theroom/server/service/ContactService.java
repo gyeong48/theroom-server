@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +98,7 @@ public class ContactService {
                 .email(contact.getEmail())
                 .phoneNumber(contact.getPhoneNumber())
                 .buildingType(contact.getBuildingType())
-                .exclusiveArea(contact.getExclusiveArea())
+                .exclusiveArea(Math.floor(contact.getExclusiveArea() * 10) / 10.0)
                 .budget(contact.getBudget())
                 .interiorType(contact.getInteriorType())
                 .startDate(contact.getStartDate())

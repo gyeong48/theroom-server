@@ -45,7 +45,7 @@ public class Contact {
     private String customer;
     private String email;
     private String phoneNumber;
-    private int exclusiveArea;
+    private double exclusiveArea;
     private boolean personalInformationAgree;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
